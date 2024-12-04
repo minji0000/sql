@@ -1,3 +1,16 @@
+--2024-12-04
+SELECT FOOD_TYPE, REST_ID, REST_NAME, FAVORITES
+FROM REST_INFO
+WHERE (FOOD_TYPE, FAVORITES) IN(
+                                    SELECT FOOD_TYPE, MAX(FAVORITES)
+                                    FROM REST_INFO
+                                    GROUP BY FOOD_TYPE
+                                )
+ORDER BY 1 desc;
+
 --2024-12-03
 SELECT FOOD_TYPE, REST_ID, REST_NAME, FAVORITES
 FROM REST_INFO
+GROUP BY FOOD_TYPE
+HAVING MAX(FAVORITES)
+ORDER BY 1 desc;
