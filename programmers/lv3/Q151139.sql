@@ -1,3 +1,10 @@
---2025-01-22
-SELECT *
+--2025-01-23
+SELECT DATE_FORMAT(START_DATE, '%Y-%m') AS MONTH, CAR_ID
 FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+WHERE DATE_FORMAT(START_DATE, '%Y-%m') BETWEEN '2022-08' AND '2022-10'
+GROUP BY CAR_ID, DATE_FORMAT(START_DATE, '%Y-%m')
+HAVING COUNT(CAR_ID) > 4
+
+-- 정답 절대 아님.. 나 group by 진짜 약하구나 힝
+-- 매번 group by 개념 제대로 안 잡고 주먹구구식으로 푸는데,,,,
+-- 다시 개념 잡자,,,
