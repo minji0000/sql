@@ -1,10 +1,12 @@
---2025-01-23
-SELECT DATE_FORMAT(START_DATE, '%Y-%m') AS MONTH, CAR_ID
+--2025-02-03
+SELECT
+        DATE_FORMAT(START_DATE, '%m') AS MONTH
+       ,CAR_ID
+       ,COUNT(CAR_ID) AS RECORDS
 FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
 WHERE DATE_FORMAT(START_DATE, '%Y-%m') BETWEEN '2022-08' AND '2022-10'
-GROUP BY CAR_ID, DATE_FORMAT(START_DATE, '%Y-%m')
-HAVING COUNT(CAR_ID) > 4
+GROUP BY DATE_FORMAT(START_DATE, '%Y-%m'), CAR_ID
+HAVING COUNT(CAR_ID) >= 5
+ORDER BY 1, 2 DESC
 
--- 정답 절대 아님.. 나 group by 진짜 약하구나 힝
--- 매번 group by 개념 제대로 안 잡고 주먹구구식으로 푸는데,,,,
--- 다시 개념 잡자,,,
+-- 정답은 아니고 푸는 중인데 내가 어떻게 생각했는지 중간 과정 남기고 싶어서.. ㅎ
