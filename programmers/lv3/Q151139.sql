@@ -1,4 +1,4 @@
---2025-02-04
+--2025-02-05
 SELECT  MONTH(START_DATE) AS MONTH
         ,CAR_ID
         ,COUNT(*) AS RECORDS
@@ -9,5 +9,9 @@ WHERE CAR_ID IN(
     WHERE START_DATE BETWEEN '2022-08-01' AND '2022-10-31'
     GROUP BY CAR_ID
     HAVING COUNT(CAR_ID) >= 5)
+--이게 정답이라는데 왜 기간 조건이 한 번 더 들어가는지 모르겠당... 내일 따로 정리해봐야지
+  AND START_DATE BETWEEN '2022-08-01' AND '2022-10-31'
 GROUP BY MONTH, CAR_ID
 ORDER BY 1, 2 DESC
+
+-- https://hmm06.tistory.com/87 참고할 링크
