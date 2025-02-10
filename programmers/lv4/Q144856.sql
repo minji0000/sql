@@ -1,0 +1,16 @@
+--2024-02-10
+SELECT B.AUTHOR_ID
+     ,B.AUTHOR_NAME
+     ,A.CATEGORY
+     ,SUM(C.SALES * A.PRICE) AS TOTAL_SALES
+FROM BOOK A INNER JOIN AUTHOR B
+                       ON A.AUTHOR_ID = B.AUTHOR_ID
+            INNER JOIN BOOK_SALES C
+                       ON A.BOOK_ID = C.BOOK_ID
+WHERE C.SALES_DATE BETWEEN '2022-01-01' AND '2022-01-31'
+-- WHERE DATE_FORMAT(C.SALES_DATE, '%Y-%m') = '2022-01' 기존에 내가 쓴 쿼리
+GROUP BY B.AUTHOR_ID, A.CATEGORY
+ORDER BY 1, 3 DESC
+
+-- 야금야금 다른 분들 쿼리도 확인해가면서 풀었다,,,
+-- 틀렸던 이유는 join이 잘못 됐었따,, 바보
