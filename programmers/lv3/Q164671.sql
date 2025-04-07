@@ -1,10 +1,11 @@
--- 2025-04-03
-SELECT *
+-- 2025-04-07
+SELECT CONCAT('/home/grep/src/', A.BOARD_ID, '/', B.FILE_ID, B.FILE_NAME, FILE_EXT) AS FILE_PATH
 FROM USED_GOODS_BOARD A INNER JOIN USED_GOODS_FILE B
-ON(A.BOARD_ID = B.BOARD_ID)
+                                   ON(A.BOARD_ID = B.BOARD_ID)
 WHERE A.BOARD_ID = (
-                        SELECT BOARD_ID
-                        FROM USED_GOODS_BOARD
-                        ORDER BY VIEWS DESC
-                        LIMIT 1
-                    )
+    SELECT BOARD_ID
+    FROM USED_GOODS_BOARD
+    ORDER BY VIEWS DESC
+    LIMIT 1
+    )
+ORDER BY B.FILE_ID DESC
