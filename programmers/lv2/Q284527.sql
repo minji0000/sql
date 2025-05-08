@@ -1,12 +1,27 @@
--- 2025-05-06
-SELECT  C.SCORE
+-- 2025-05-09
+-- 결과는 나오는데 지저분한 느낌
+SELECT (SELECT SUM(SCORE)
+        FROM HR_GRADE
+        GROUP BY EMP_NO
+        ORDER BY 1 DESC
+           LIMIT 1) AS SCORE
      ,B.EMP_NO
      ,B.EMP_NAME
      ,B.POSITION
      ,B.EMAIL
-     ,C.HALF_YEAR
 FROM HR_DEPARTMENT A INNER JOIN HR_EMPLOYEES B
-                                ON A.DEPT_ID = B.DEPT_ID
-                     INNER JOIN HR_GRADE C
-                                ON B.EMP_NO = C.EMP_NO
-WHERE C.HALF_YEAR IN (1, 2)
+ON A.DEPT_ID = B.DEPT_ID
+    INNER JOIN HR_GRADE C
+    ON B.EMP_NO = C.EMP_NO
+WHERE B.EMP_NO = (
+    SELECT EMP_NO
+    FROM HR_GRADE
+    GROUP BY EMP_NO
+    ORDER BY 1 DESC
+    LIMIT 1
+    )
+GROUP BY B.EMP_NO;
+
+SELECT SUM(SCORE)
+FROM HR_GRADE
+GROUP BY EMP_NO;
