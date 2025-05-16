@@ -1,4 +1,8 @@
---2025-05-15
+--2025-05-16
+select COUNT(fish_type), DATE_FORMAT(time, 'Y%m%')
+from fish_info
+group by DATE_FORMAT(time, 'Y%m%')
+
 select ifnull(LENGTH, 10)
 from fish_info
 order by time
