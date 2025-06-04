@@ -1,15 +1,11 @@
---2025-06-03 예제
-SELECT A.n AS h , ifnull(B.cnt,0) AS cnt
-FROM
-    (SELECT @N := @N +1 AS n
-     FROM access_log, (select @N:=-1 from DUAL ) NN
-         LIMIT 24) AS A
-        LEFT JOIN
-    (SELECT HOUR(access_date) AS hh, COUNT(access_date) AS cnt
-     FROM access_log
-     WHERE access_date BETWEEN '2022-01-01 00:00:00' AND date_format(now(),'%Y-%m-%d 23:59:59')
-     GROUP BY hh) AS B
-    ON A.n = B.hh ;
+--2025-06-05
+WITH RECURSIVE HOURS AS (
+    SELECT 0 AS HOUR
+UNION ALL
+SELECT HOUR + 1 FROM HOURS WHERE HOUR < 23
+    )
+SELECT HOURS.HOUR
+FROM HOURS;
 
 
 
