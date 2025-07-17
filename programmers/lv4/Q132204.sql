@@ -1,3 +1,20 @@
+--2025-07-17
+SELECT  A.APNT_NO
+     ,P.PT_NAME
+     ,P.PT_NO
+     ,A.MCDP_CD
+     ,D.DR_NAME
+     ,A.APNT_YMD
+FROM PATIENT P JOIN APPOINTMENT A
+                    ON(P.PT_NO = A.PT_NO)
+               JOIN DOCTOR D
+                    ON(D.DR_ID = A.MDDR_ID)
+WHERE D.MCDP_CD = 'CS'
+  AND A.APNT_YMD LIKE '2022-04-13%'
+  AND A.APNT_CNCL_YN = 'N'
+ORDER BY A.APNT_YMD
+-- join 조건을 잘못쓰고 있었다니,, ㅠㅠ 진짜 바보 같아
+
 --2025-07-09
 SELECT  A.APNT_NO
 ,P.PT_NAME
