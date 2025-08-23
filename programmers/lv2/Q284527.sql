@@ -1,3 +1,22 @@
+--2025-08-23
+SELECT B.SCORE, B.EMP_NO, EMP_NAME, POSITION, EMAIL
+FROM HR_EMPLOYEES A
+         INNER JOIN (
+                        SELECT EMP_NO, SUM(SCORE) AS SCORE
+                        FROM HR_GRADE
+                        GROUP BY EMP_NO
+                        HAVING SUM(SCORE) = (
+                            SELECT MAX(TOTAL_SCORE)
+                            FROM (
+                                     SELECT SUM(SCORE) AS TOTAL_SCORE
+                                     FROM HR_GRADE
+                                     GROUP BY EMP_NO
+                                ) t
+        )
+) B
+ON(A.EMP_NO = B.EMP_NO)
+
+
 -- 2025-05-09
 -- 결과는 나오는데 지저분한 느낌
 SELECT (SELECT SUM(SCORE)
