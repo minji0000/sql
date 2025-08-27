@@ -1,0 +1,4 @@
+-- 2025-08-27
+SELECT *
+FROM USER_INFO A INNER JOIN ONLINE_SALE B
+                            ON (A.USER_ID = B.USER_ID)
